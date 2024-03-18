@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "253260617688",
+    "project_id": "token-booking-3d2c5",
+    "storage_bucket": "token-booking-3d2c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253260617688:android:a349d4609c86c3d1d084ad",
+        "android_client_info": {
+          "package_name": "com.example.tokenbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "253260617688-2qcsk0c1mr2p0589qhf07o5co7cvt8l6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChQFkyEHUkgzqzu8XCxpnmxYxBGVrGUAw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "253260617688-2qcsk0c1mr2p0589qhf07o5co7cvt8l6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
