@@ -11,27 +11,30 @@ class SplashScreen4 extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen4> {
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Future.delayed(Duration(seconds: 2)).then((value) => { Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) => Record() ))
-
-    });
+    Future.delayed(const Duration(seconds: 2)).then((value) => {
+          Navigator.of(context)
+              .pushReplacement(MaterialPageRoute(builder: (ctx) => const Record()))
+        });
   }
+
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(image: AssetImage('lib/Assets/BW.jpg'),
-              width:350 ,
+            Image(
+              image: AssetImage('lib/Assets/BW.jpg'),
+              width: 350,
             ),
-            SizedBox(height: 100,),
+            SizedBox(
+              height: 100,
+            ),
             SpinKitChasingDots(
               color: Colors.blue,
               size: 50,
