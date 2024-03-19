@@ -1,10 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tokenbooking/splash_sreen2.dart';
-import 'register_page.dart';
-import 'home_page.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -53,9 +50,9 @@ class _LoginState extends State<Login> {
                   value: selectedItem,
                   items: options
                       .map(
-                        (day) => DropdownMenuItem(
-                          value: day,
-                          child: Text(day),
+                        (item) => DropdownMenuItem(
+                          value: item,
+                          child: Text(item),
                         ),
                       )
                       .toList(),
@@ -115,44 +112,19 @@ class _LoginState extends State<Login> {
                         await auth.signInWithEmailAndPassword(
                             email: emailController.text,
                             password: passwordController.text);
-
                     user = userCredential.user;
                     if (user != null) {
-                      //Navigator.pushNamed(context,"homepage");
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (ctx) => SplashScreen2(selectedItem)));
-
-                      Fluttertoast.showToast(
-                          msg: "Succesfull Logged in",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          backgroundColor: Colors.blue,
-                          textColor: Colors.white,
-                          fontSize: 18.0);
+                      toastMessage(isSuccess: true);
                     }
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'user-not-found') {
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('no user oound'),backgroundColor: Colors.red,));
-                      Fluttertoast.showToast(
-                          msg: "wrong email or password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER_LEFT,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                      toastMessage();
                     }
                     if (e.code == 'wrong-password') {
-                      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('no match pass ound'),backgroundColor: Colors.red,));
-                      Fluttertoast.showToast(
-                          msg: "wrong email or password",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER_LEFT,
-                          backgroundColor: Colors.red,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
+                      toastMessage();
                     }
-                  } catch (e) {
-                    print(e);
                   }
                 },
                 child: const Text(
@@ -183,5 +155,15 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  toastMessage({bool isSuccess = false}) {
+    Fluttertoast.showToast(
+        msg: isSuccess  ? "Successful Logged in": "wrong email or password",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: isSuccess ? Colors.blue : Colors.red,
+        textColor: Colors.white,
+        fontSize: isSuccess ? 18 : 16);
   }
 }

@@ -10,82 +10,41 @@ class Hallpage extends StatefulWidget {
 }
 
 class _HallpageState extends State<Hallpage> {
-
   String selectedItem = 'JAMH';
-  List options = ['JAMH','BSMRH','SJRH','AKBH','SJJIH','SRH','BSFMH',];
+  List options = [
+    'JAMH',
+    'BSMRH',
+    'SJRH',
+    'AKBH',
+    'SJJIH',
+    'SRH',
+    'BSFMH',
+  ];
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
         backgroundColor: Colors.cyan,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(20),
-            bottomRight: Radius.circular(20),
-
-          )
-        ),
-
-        title: Text("Hall Select"),
-
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
+        )),
+        title: const Text("Hall Select"),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             CarouselSlider(
-
               items: [
-                //1st Image of Slider
-                Container(
-                  margin: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    image: DecorationImage(
-                      image: AssetImage('lib/Assets/SRH.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-
-                //2nd Image of Slider
-                Container(
-                  margin: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    image: DecorationImage(
-                      image: AssetImage("lib/Assets/bsmrh.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-
-                //3rd Image of Slider
-                Container(
-                  margin: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    image: DecorationImage(
-                      image: AssetImage("lib/Assets/JAMH.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(6.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.0),
-                    image: DecorationImage(
-                      image: NetworkImage("https://naeemur.github.io/mbstu/assets/a/32.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-
+                carouselItem(imgPath: 'lib/Assets/SRH.jpg'),
+                carouselItem(imgPath: 'lib/Assets/bsmrh.jpg'),
+                carouselItem(imgPath: 'lib/Assets/JAMH.jpg'),
+                carouselItem(
+                    imgPath: 'https://naeemur.github.io/mbstu/assets/a/32.jpg',isNet: true),
               ],
-
-              //Slider Container properties
               options: CarouselOptions(
                 height: 250.0,
                 enlargeCenterPage: true,
@@ -93,50 +52,78 @@ class _HallpageState extends State<Hallpage> {
                 aspectRatio: 16 / 9,
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enableInfiniteScroll: true,
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 viewportFraction: 0.8,
               ),
             ),
-            SizedBox(height: 30,),
-            Text("Select Your Hall",
-            style: TextStyle(
-              fontSize: 24,fontWeight: FontWeight.bold
-            ),),
-            SizedBox(height: 80,),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              "Select Your Hall",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
             DropdownButton(
-
-              isExpanded: true,
-              style: TextStyle(color: Colors.black,fontSize: 22),
-
+                isExpanded: true,
+                style: const TextStyle(color: Colors.black, fontSize: 22),
                 value: selectedItem,
                 items: options
-                    .map((day) => DropdownMenuItem(
-                  child: Text(day),
-                  value: day,),
-                ).toList(),
-                onChanged: (value){
+                    .map(
+                      (item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(item),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
                   setState(() {
                     selectedItem = value.toString();
                   });
                 }),
-            SizedBox(height: 100,),
+            const SizedBox(
+              height: 100,
+            ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.cyan,
-                borderRadius: BorderRadius.circular(20)
-              ),
+                  color: Colors.cyan, borderRadius: BorderRadius.circular(20)),
               width: 100,
               height: 100,
               // color: Colors.cyan,
 
               child: IconButton(
-                  onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> SplashScreen3(selectedItem)));
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (ctx) => SplashScreen3(selectedItem)));
                   },
-                  icon: Icon(Icons.navigate_next,size: 70,color: Colors.white,)),
+                  icon: const Icon(
+                    Icons.navigate_next,
+                    size: 70,
+                    color: Colors.white,
+                  )),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget carouselItem({String? imgPath, bool isNet = false}) {
+    return Container(
+      margin: const EdgeInsets.all(6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        image: isNet
+            ? DecorationImage(
+                image: NetworkImage(imgPath!),
+                fit: BoxFit.cover,
+              )
+            : DecorationImage(
+                image: AssetImage(imgPath!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

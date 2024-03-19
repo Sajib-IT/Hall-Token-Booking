@@ -1,76 +1,67 @@
-import 'package:tokenbooking/hall_select.dart';
-
 import 'home_page.dart';
-import 'home_page2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 class SplashScreen3 extends StatefulWidget {
   var selectedItem;
   SplashScreen3(this.selectedItem);
 
   @override
-  State<SplashScreen3> createState() => _SplashScreenState3(selectedItem);
+  State<SplashScreen3> createState() => _SplashScreenState3();
 }
 
 class _SplashScreenState3 extends State<SplashScreen3> {
-  var selectedItem;
-  _SplashScreenState3(this.selectedItem);
+  _SplashScreenState3();
   @override
   void initState() {
-    // TODO: implement initState
+    switch (widget.selectedItem) {
+      case 'JAMH':
+        navigatePage();
+        break;
+      case 'BSMRH':
+        navigatePage();
+        break;
+      case 'SJRH':
+        navigatePage();
+        break;
+      case 'AKBH':
+        navigatePage();
+        break;
+      case 'SJJIH':
+        navigatePage();
+        break;
+      case 'SRH':
+        navigatePage();
+        break;
+      case 'BSFMH':
+        navigatePage();
+        break;
+    }
     super.initState();
-    if(selectedItem=='JAMH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-    else if(selectedItem=='BSMRH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-     else if(selectedItem=='SJRH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-    else if(selectedItem=='AKBH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-    else if(selectedItem=='SJJIH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-    else if(selectedItem=='SRH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-    else if(selectedItem=='BSFMH'){
-      Future.delayed(Duration(seconds: 3)).then((value) => {Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (ctx) => Homepage() ))
-      });
-    }
-
-
   }
+
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(image: AssetImage('lib/Assets/BW.jpg'),
-              width:350 ,
+            Image(
+              image: AssetImage('lib/Assets/BW.jpg'),
+              width: 350,
             ),
-            SizedBox(height: 100,),
-            Text('  Loading..',style: TextStyle(fontSize: 20),),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 100,
+            ),
+            Text(
+              '  Loading..',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             SpinKitDoubleBounce(
               color: Colors.blue,
               size: 50,
@@ -79,5 +70,12 @@ class _SplashScreenState3 extends State<SplashScreen3> {
         ),
       ),
     );
+  }
+
+  void navigatePage() {
+    Future.delayed(const Duration(seconds: 3)).then((value) => {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (ctx) => const Homepage()))
+        });
   }
 }
