@@ -113,7 +113,6 @@ class _Homepage2State extends State<Homepage2> {
       stream: FirebaseFirestore.instance.collection('lunch').snapshots(),
       builder: (context, snapshot) {
 
-
         // Process the data and build your UI here
         final List<DocumentSnapshot> documents = snapshot.data!.docs;
         return ListView.builder(
